@@ -12,3 +12,7 @@ https://turnbasedgames.github.io/
 ## Have questions?
 
 Talk to us on [discord](https://discord.gg/myWacjdb5S)
+
+## Misc
+
+contributor [docs](https://docs.google.com/document/d/1EYkoO5qodNlRMi4z3AbtA8AcimFg0a5ZmacA4cJ2NzE/edit?usp=sharing)
