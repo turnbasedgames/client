@@ -24,7 +24,7 @@ function getBoardGame() {
   return curBoardGame;
 }
 
-function getLocalPlayer() {
+async function getLocalPlayer() {
   const parent = await connection.promise;
   return parent.getLocalPlayer();
 }
