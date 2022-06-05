@@ -4,13 +4,30 @@ const EventEmitter = require('./src/util/eventEmitter');
 
 const eventEmitter = new EventEmitter();
 
+let curBoardGame = null;
+const setBoardGameWithContender = (contender) => {
+  if (!curBoardGame || (curBoardGame.version < contender.version)) {
+    curBoardGame = contender;
+    eventEmitter.emit('stateChanged', contender);
+  }
+};
+
 const connection = connectToParent({
   methods: {
-    stateChanged(state) {
-      eventEmitter.emit('stateChanged', state);
+    stateChanged(boardGame) {
+      setBoardGameWithContender(boardGame);
     },
   },
 });
+
+function getBoardGame() {
+  return curBoardGame;
+}
+
+async function getLocalPlayer() {
+  const parent = await connection.promise;
+  return parent.getLocalPlayer();
+}
 
 async function makeMove(move) {
   const parent = await connection.promise;
@@ -18,5 +35,5 @@ async function makeMove(move) {
 }
 
 module.exports = {
-  makeMove, events: eventEmitter,
+  getBoardGame, getLocalPlayer, makeMove, events: eventEmitter,
 };
